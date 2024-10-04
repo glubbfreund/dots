@@ -57,14 +57,17 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-z/zsh-z.plugin.zsh
 
-# add alias
+# add alias and extend path
 alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+alias tree='exa --tree --level=2'
+alias ls='exa'
+path+='/home/oli/Src/apt-undo'
 
 # run fastfetch
 fastfetch
 
 # set xserver
-export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0
+# export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0
 export GDK_DPI_SCALE=1.25
 
 # enable starship
