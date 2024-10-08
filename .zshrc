@@ -65,7 +65,11 @@ alias ls='exa'
 
 # extend path variable
 path+='/home/oli/Src/apt-undo'
-path+='/usr/local/go/bin'
+path+='/usr/local/.go/bin'
+
+# set go variables
+export GOPATH=$HOME/.go
+export GOBIN=$HOME/.go/bin
 
 # run fastfetch
 # fastfetch
