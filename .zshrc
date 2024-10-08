@@ -59,6 +59,7 @@ source /usr/share/zsh-z/zsh-z.plugin.zsh
 
 # add alias and extend path
 alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+alias emacs='GTK_THEME=Adwaita:dark emacs'
 alias tree='exa --tree --level=2'
 alias ls='exa'
 
