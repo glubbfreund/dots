@@ -64,7 +64,7 @@ alias tree='exa --tree --level=2'
 alias ls='exa'
 
 # extend path variable
-path+='/home/oli/Src/apt-undo'
+path+='/home/oli/src/apt-undo'
 path+='/usr/local/go/bin'
 
 # set go variables
