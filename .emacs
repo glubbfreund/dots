@@ -33,6 +33,7 @@
       use-dialog-box nil
 	  inhibit-startup-message t
 	  initial-scratch-message nil
+	  auto-save-default nil
       ring-bell-function 'ignore)
 
 ;; Replace def message
@@ -42,7 +43,7 @@
 ;; custom command to open term with zsh without asking
 (defun ter ()
   (interactive)
-  (split-window-vertically)
+  (split-window-horizontally)
   (other-window 1)
   (term "/usr/bin/zsh"))
 
@@ -72,3 +73,8 @@
 
 ;; Set tab-width 
 (setq-default tab-width 4)
+
+;; Autorun eglot
+(add-hook 'typescript-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'go-mode-hook 'eglot-ensure)
