@@ -9,7 +9,7 @@
  '(display-battery-mode t)
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode t)
- '(package-selected-packages '(typescript-mode go-mode gruber-darker-theme))
+ '(package-selected-packages '(evil typescript-mode go-mode gruber-darker-theme))
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
 (custom-set-faces
@@ -78,3 +78,7 @@
 (add-hook 'typescript-mode-hook 'eglot-ensure)
 (add-hook 'python-mode-hook 'eglot-ensure)
 (add-hook 'go-mode-hook 'eglot-ensure)
+
+;; Enable Evil
+(require 'evil)
+(evil-mode 1)
