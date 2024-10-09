@@ -66,6 +66,7 @@ alias ls='exa'
 # extend path variable
 path+='/home/oli/src/apt-undo'
 path+='/usr/local/go/bin'
+path+='/home/oli/.local/share/nvim/mason/bin'
 
 # set go variables
 export GOPATH=$HOME/.go
