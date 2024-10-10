@@ -8,12 +8,6 @@
    '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7" default))
  '(package-selected-packages '(magit typescript-mode go-mode gruber-darker-theme)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; My configurations
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; line numbers, relative please
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
@@ -102,3 +96,4 @@
               (and plus-minus
                    (string-match "^\\([0-9]+\\)\t\\([0-9]+\\)\t" plus-minus)
                    (format " +%s-%s" (match-string 1 plus-minus) (match-string 2 plus-minus)))))))
+
