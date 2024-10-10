@@ -3,23 +3,20 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(use-package gruber-darker)
  '(custom-enabled-themes '(gruber-darker))
  '(custom-safe-themes
    '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7" default))
  '(display-battery-mode t)
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode t)
- '(package-selected-packages '(evil typescript-mode go-mode gruber-darker-theme))
- '(tool-bar-mode nil)
- '(tooltip-mode nil))
+ '(package-selected-packages '(magit typescript-mode go-mode gruber-darker-theme))
+ '(use-package gruber-darker))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Iosevka Nerd Font" :foundry "UKWN" :slant normal :weight regular :height 143 :width normal)))))
-
+'(default ((t (:family "Iosevka Nerd Font" :foundry "UKWN" :slant normal :weight regular :height 143 :width normal)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; My configurations
@@ -27,9 +24,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; remove not used features
-
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(menu-bar-mode -1)
 (setq make-backup-files nil
       use-dialog-box nil
 	  inhibit-startup-message t
@@ -37,18 +34,21 @@
 	  auto-save-default nil
       ring-bell-function 'ignore)
 
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
 ;; Replace def message
 (defun display-startup-echo-area-message ()
   (message ""))
 
 ;; custom command to open term with zsh without asking
-
-(if (eq system-type 'gnu/linux)
-	(defun ter ()
-	  (interactive)
-	  (split-window-horizontally)
-	  (other-window 1)
-	  (term "/usr/bin/zsh"))
+(defun ter ()
+  (interactive)
+  (split-window-horizontally)
+  (other-window 1)
+  (if (eq system-type 'gnu/linux)(term "/usr/bin/zsh"))
+  (if (eq system-type 'windows-nt)(eshell))
 )
 
 ;; automatically kill term buffer if process exits
@@ -82,11 +82,11 @@
 ;; Set tab-width 
 (setq-default tab-width 4)
 
-;; Autorun eglot
+;; Autorun eglotw
 (add-hook 'typescript-mode-hook 'eglot-ensure)
 (add-hook 'python-mode-hook 'eglot-ensure)
 (add-hook 'go-mode-hook 'eglot-ensure)
 
 ;; Enable Evil
-(use-package evil)
+(require 'evil)
 (evil-mode 1)
