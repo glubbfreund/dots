@@ -11,16 +11,17 @@
  '(global-display-line-numbers-mode t)
  '(package-selected-packages '(magit typescript-mode go-mode gruber-darker-theme)))
 
-(defun font-exists-p (font) (if (null (x-list-fonts font)) nil t))
-(when (window-system)
-  (cond ((font-exists-p "Iosevka NFM") (set-frame-font "Iosevka NFM:spacing=100:size=20" nil t))
-    ((font-exists-p "Iosevka Nerd Font") (set-frame-font "Iosevka Nerd Font:spacing=100:size=20" nil t))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; My configurations
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; set font 
+(defun font-exists-p (font) (if (null (x-list-fonts font)) nil t))
+(when (window-system)
+  (cond ((font-exists-p "Iosevka NFM") (set-frame-font "Iosevka NFM:spacing=100:size=20" nil t))
+    ((font-exists-p "Iosevka Nerd Font") (set-frame-font "Iosevka Nerd Font:spacing=100:size=20" nil t))))
 
 ;; remove not used features
 (tool-bar-mode -1)
@@ -33,13 +34,13 @@
 	  auto-save-default nil
       ring-bell-function 'ignore)
 
+;; Add Melpa repository
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;; Replace def message
-(defun display-startup-echo-area-message ()
-  (message ""))
+(defun display-startup-echo-area-message () (message ""))
 
 ;; custom command to open term with zsh without asking
 (defun ter ()
@@ -47,8 +48,7 @@
   (split-window-horizontally)
   (other-window 1)
   (if (eq system-type 'gnu/linux)(term "/usr/bin/zsh"))
-  (if (eq system-type 'windows-nt)(eshell))
-)
+  (if (eq system-type 'windows-nt)(eshell)))
 
 ;; automatically kill term buffer if process exits
 (defun my-term-handle-exit (&optional process-name msg)
@@ -98,4 +98,3 @@
               (and plus-minus
                    (string-match "^\\([0-9]+\\)\t\\([0-9]+\\)\t" plus-minus)
                    (format " +%s-%s" (match-string 1 plus-minus) (match-string 2 plus-minus)))))))
-
