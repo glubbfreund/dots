@@ -6,9 +6,6 @@
  '(custom-enabled-themes '(gruber-darker))
  '(custom-safe-themes
    '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7" default))
- '(display-battery-mode t)
- '(display-line-numbers-type 'relative)
- '(global-display-line-numbers-mode t)
  '(package-selected-packages '(magit typescript-mode go-mode gruber-darker-theme)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -17,7 +14,11 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; set font 
+;; line numbers, relative please
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+
+;; set font, different names for win/linux
 (defun font-exists-p (font) (if (null (x-list-fonts font)) nil t))
 (when (window-system)
   (cond ((font-exists-p "Iosevka NFM") (set-frame-font "Iosevka NFM:spacing=100:size=20" nil t))
@@ -29,7 +30,7 @@
 (menu-bar-mode -1)
 (setq make-backup-files nil
       use-dialog-box nil
-	  inhibit-startup-message t
+	  inhibit-startup-message 1
 	  initial-scratch-message nil
 	  auto-save-default nil
       ring-bell-function 'ignore)
@@ -39,10 +40,7 @@
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
-;; Replace def message
-(defun display-startup-echo-area-message () (message ""))
-
-;; custom command to open term with zsh without asking
+;; custom command to open term with zsh without asking (and eshell on windows)
 (defun ter ()
   (interactive)
   (split-window-horizontally)
@@ -78,7 +76,9 @@
 (global-auto-revert-mode 1)
 
 ;; Set tab-width 
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
 
 ;; Autorun eglot
 (add-hook 'typescript-mode-hook 'eglot-ensure)
@@ -88,6 +88,10 @@
 ;; Enable Evil
 (require 'evil)
 (evil-mode 1)
+
+;; show battery state in status line and prevent startup message
+(display-battery-mode 1)
+(defun display-startup-echo-area-message () (message ""))
 
 ;; Gives me git changes in the status line
 (defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
