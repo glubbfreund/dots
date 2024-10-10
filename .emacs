@@ -9,14 +9,13 @@
  '(display-battery-mode t)
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode t)
- '(package-selected-packages '(magit typescript-mode go-mode gruber-darker-theme))
- '(use-package gruber-darker))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-'(default ((t (:family "Iosevka Nerd Font" :foundry "UKWN" :slant normal :weight regular :height 143 :width normal)))))
+ '(package-selected-packages '(magit typescript-mode go-mode gruber-darker-theme)))
+
+(defun font-exists-p (font) (if (null (x-list-fonts font)) nil t))
+(when (window-system)
+  (cond ((font-exists-p "Iosevka NFM") (set-frame-font "Iosevka NFM:spacing=100:size=20" nil t))
+    ((font-exists-p "Iosevka Nerd Font") (set-frame-font "Iosevka Nerd Font:spacing=100:size=20" nil t))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; My configurations
@@ -55,14 +54,13 @@
 (defun my-term-handle-exit (&optional process-name msg)
   (message "%s | %s" process-name msg)
   (kill-buffer (current-buffer)))
-
 (advice-add 'term-handle-exit :after 'my-term-handle-exit)
 
-;; Make Emacs frame maximized
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Enable recentf-mode shows recent files if using recentf-open-files
-(recentf-mode 1)
+;; Resizing the window to my needs
+(if (window-system)
+(setq default-frame-alist
+        (append '((width . 150) (height . 30) (top . 120) (left . 185))
+                default-frame-alist)))
 
 ;; SAVE what is entered into minibuffer prompts
 ;; use M-n for next and M-p for previous
@@ -82,7 +80,7 @@
 ;; Set tab-width 
 (setq-default tab-width 4)
 
-;; Autorun eglotw
+;; Autorun eglot
 (add-hook 'typescript-mode-hook 'eglot-ensure)
 (add-hook 'python-mode-hook 'eglot-ensure)
 (add-hook 'go-mode-hook 'eglot-ensure)
@@ -90,3 +88,14 @@
 ;; Enable Evil
 (require 'evil)
 (evil-mode 1)
+
+;; Gives me git changes in the status line
+(defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
+  (setq ad-return-value
+    (concat ad-return-value
+            (let ((plus-minus (vc-git--run-command-string
+                               file "diff" "--numstat" "--")))
+              (and plus-minus
+                   (string-match "^\\([0-9]+\\)\t\\([0-9]+\\)\t" plus-minus)
+                   (format " +%s-%s" (match-string 1 plus-minus) (match-string 2 plus-minus)))))))
+
