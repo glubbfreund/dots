@@ -40,17 +40,9 @@ ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # remove underline also for sudo precommand
 ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,bold'
-
-# enable color support
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls --color=auto'
-  alias dir='dir --color=auto'
-  alias vdir='vdir --color=auto'
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
+#  will first try to find a suggestion from your history, but, 
+#  if it can't find a match, will find a suggestion from the completion engine.
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # add addons (as debian package) and enable starship
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
