@@ -79,6 +79,7 @@ export GOBIN=$HOME/.go/bin
 # enable starship
 eval "$(starship init zsh)"
 
+# sets newline after each command prompt
 precmd() {
   precmd() {
     echo
