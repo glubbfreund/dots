@@ -47,7 +47,12 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # add addons (as debian package) and enable starship
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/zsh-z/zsh-z.plugin.zsh
+
+# keybinds
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # add alias and extend path
 alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
@@ -73,3 +78,9 @@ export GOBIN=$HOME/.go/bin
 
 # enable starship
 eval "$(starship init zsh)"
+
+precmd() {
+  precmd() {
+    echo
+  }
+}
