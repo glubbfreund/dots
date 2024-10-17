@@ -56,7 +56,7 @@ bindkey '^[[B' history-substring-search-down
 
 # add alias and extend path
 alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
-alias emacs='GTK_THEME=Adwaita:dark emacs'
+alias emacs='GTK_THEME=Adwaita:dark emacsclient -n -c -a "" -F "((fullscreen . fullboth))"'
 alias tree='exa --tree --level=2'
 alias ls='exa'
 
@@ -69,12 +69,9 @@ path+='/home/oli/.local/share/nvim/mason/bin'
 export GOPATH=$HOME/.go
 export GOBIN=$HOME/.go/bin
 
-# run fastfetch
-# fastfetch
-
 # set xserver
 # export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0
-# export GDK_DPI_SCALE=1.25
+export GDK_DPI_SCALE=1.25
 
 # enable starship
 eval "$(starship init zsh)"
