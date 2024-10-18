@@ -1,0 +1,22 @@
+syntax enable
+set tabstop=4
+set shiftwidth=4
+set nobackup
+set number
+set hlsearch
+set incsearch
+set showmatch
+set ignorecase
+set smartcase
+set showcmd
+set showmode
+let g:netrw_liststyle = 3
+set ttimeout
+set ttimeoutlen=100
+set cursorline
+set scrolloff=10
+set nowrap
+set history=1000
+let mapleader = ","
+inoremap jj <Esc>
+nnoremap <leader>e :E<cr>
