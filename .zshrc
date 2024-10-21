@@ -40,7 +40,7 @@ ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # remove underline also for sudo precommand
 ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,bold'
-#  will first try to find a suggestion from your history, but, 
+#  will first try to find a suggestion from your history, but,
 #  if it can't find a match, will find a suggestion from the completion engine.
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
@@ -59,6 +59,7 @@ alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias emacs='GTK_THEME=Adwaita:dark emacsclient -n -c -a "" -F "((fullscreen . fullboth))"'
 alias tree='exa --tree --level=2'
 alias ls='exa'
+alias ip='ip -c'
 
 # extend path variable
 path+='/home/oli/src/apt-undo'
