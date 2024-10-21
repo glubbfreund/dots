@@ -10,14 +10,18 @@ HISTFILE=~/.zsh_history
 
 # Use modern completion system
 autoload -Uz compinit
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 compinit
+
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -40,19 +44,15 @@ ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # remove underline also for sudo precommand
 ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,bold'
-#  will first try to find a suggestion from your history, but,
-#  if it can't find a match, will find a suggestion from the completion engine.
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # add addons (as debian package) and enable starship
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/zsh-z/zsh-z.plugin.zsh
 
 # keybinds
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey "$key[Up]" up-line-or-beginning-search
+bindkey "$key[Down]" down-line-or-beginning-search
 
 # add alias and extend path
 alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
