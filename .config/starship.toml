@@ -11,24 +11,24 @@ $line_break\
 $python"""
 
 [directory]
-style = "red"
+style = "white"
 read_only = "!"
 
 [line_break]
 disabled = true
 
 [character]
-success_symbol = "[](white) "
-error_symbol = "[](red) "
+success_symbol = "[](blue) "
+error_symbol = "[](red) "
 vimcmd_symbol = "[](green) "
 
 [git_branch]
 format = "[$branch]($style)"
-style = "bright-black"
+style = "yellow"
 
 [git_status]
 format = "[[($conflicted$untracked$modified$staged$renamed$deleted)]($style)($ahead_behind$stashed)]($style) "
-style = "bright-black"
+style = "yellow"
 conflicted = "!"
 untracked = "+"
 modified = "~"
