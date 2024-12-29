@@ -60,6 +60,7 @@ alias emacs='GTK_THEME=Adwaita:dark emacsclient -n -c -a "" -F "((fullscreen . f
 alias tree='exa --tree --level=2'
 alias ls='exa'
 alias ip='ip -c'
+alias e='emacsclient -t'
 
 # extend path variable
 path+='/home/oli/src/apt-undo'
